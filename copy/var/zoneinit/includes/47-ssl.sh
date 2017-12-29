@@ -19,7 +19,7 @@ if mdata-get nginx_ssl 1>/dev/null 2>&1; then
 	openssl crl2pkcs7 -nocrl -certfile "${SSL_HOME}/nginx.pem" | \
 		openssl pkcs7 -print_certs -out "${SSL_HOME}/nginx.crt"
 	)
-elif /opt/core/bin/ssl-letsencrypt.sh -t webroot 1>/dev/null; then
+elif /opt/qutic/bin/ssl-letsencrypt.sh -t webroot 1>/dev/null; then
 	# Try to generate let's encrypt ssl certificate for the hostname
 	LE_HOME='/opt/local/etc/letsencrypt/'
 	LE_LIVE="${LE_HOME}live/$(hostname)/"

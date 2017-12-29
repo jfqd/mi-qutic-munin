@@ -9,4 +9,4 @@ SSL_HOME='/opt/local/etc/nginx/ssl/'
 mkdir -p "${SSL_HOME}"
 
 # Self-signed certificate generator
-/opt/core/bin/ssl-selfsigned.sh -d ${SSL_HOME} -f nginx
+/opt/qutic/bin/ssl-selfsigned.sh -d ${SSL_HOME} -f nginx
