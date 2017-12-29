@@ -1,0 +1,7 @@
+munin-master
+nginx
+py35-gunicorn
+py35-pip
+py35-expat
+py35-sqlite3
+spawn-fcgi

@@ -1,0 +1,8 @@
+name="qutic-munin"
+organization="qutic development"
+brand="Instance"
+version="17.3.0"
+description="qutic Munin Server"
+homepage="https://github.com/jfqd/mi-core-munin"
+users="root admin"
+base="e46a0d60-e579-11e7-a2b1-0b33b7436da4"

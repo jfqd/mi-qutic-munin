@@ -1,0 +1,49 @@
+#!/usr/bin/bash
+#
+# Put customizations to your image in this file.
+
+MUNSTRAP_VERSION=0.2
+MUNIN_MASTER_ADMIN_VERSION=0.7
+
+# Custom versions and variables
+PATH=/opt/local/gnu/bin:/opt/local/bin:/opt/local/sbin:/usr/bin:/usr/sbin
+
+# Exit if any commands fail
+set -o errexit
+
+# Configuring image specific packages
+echo "* Configuring image specific packages.";
+
+echo "* Use default python 3.5"
+pkg_alternatives manual python35
+
+echo "* Cleanup /var/munin in order to set the dataset mountpoint (must be empty)"
+rm -r /var/munin/*
+
+echo "* Download and extract munstrap to /opt/local/etc/munin/munstrap"
+(mkdir -p /opt/local/etc/munin/munstrap)
+curl -L "https://github.com/motu81/munstrap/archive/v${MUNSTRAP_VERSION}.tar.gz" | gtar xz -C /opt/local/etc/munin/munstrap --strip-components=1
+
+echo "* Rename original template and create symlinks to activate munstrap"
+(cd /opt/local/etc/munin; mv static static-orig; mv templates templates-orig; ln -s munstrap/static static; ln -s munstrap/templates templates)
+
+echo "* Download and extract munin_master_admin to /opt/munin_master_admin"
+(mkdir -p /opt/munin_master_admin)
+curl -L "https://github.com/drscream/munin_master_admin/archive/v${MUNIN_MASTER_ADMIN_VERSION}.tar.gz" | gtar xz -C /opt/munin_master_admin --strip-components=1
+chown -R www:www /opt/munin_master_admin
+
+echo "* Install required python packages"
+pip3.5 install -r /opt/munin_master_admin/req.txt
+
+echo "* Create nginx ssl folder"
+mkdir -p /opt/local/etc/nginx/ssl
+
+echo "* Cleanup home/admin because of delegate dataset usage"
+rm -rf /home/admin/.[^.]*
+
+# Clean up
+echo "* Cleaning up."
+rm -rf /root/*
+
+# Prepare image for provisioning
+sm-prepare-image -y
