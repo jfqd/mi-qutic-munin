@@ -53,7 +53,7 @@ vmadm create << EOF
     "mail_auth_pass":        "smtp-account-password",
     "mail_adminaddr":        "report@example.com",
     "munin_master_allow":    "munin-master-ip",
-    "vfstab":                "storage.example.com:/export/data    -       /data    nfs     -       yes     rw,bg,intr",
+    "vfstab":                "storage.example.com:/export/munin    -       /var/munin    nfs     -       yes     rw,bg,intr",
     "nginx_ssl":             "certificat-with-encoded-linebreaks",
     "munin_admin":           "munin-admin-password"
   }
