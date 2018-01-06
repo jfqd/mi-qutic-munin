@@ -40,6 +40,7 @@ pip3.5 install -r /opt/munin_master_admin/req.txt
 
 echo "* Create nginx ssl folder"
 mkdir -p /opt/local/etc/nginx/ssl
+touch /opt/local/etc/nginx/.htpasswd
 
 echo "* Cleanup home/admin because of delegate dataset usage"
 rm -rf /home/admin/.[^.]*

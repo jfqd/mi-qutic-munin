@@ -34,5 +34,11 @@ elif /opt/qutic/bin/ssl-letsencrypt.sh -t webroot 1>/dev/null; then
   chmod 0640 "${SSL_HOME}"/nginx.*
 fi
 
+# create htpasswd file
+if mdata-get nginx_htpasswd 1>/dev/null 2>&1; then
+  mdata-get nginx_htpasswd > /opt/local/etc/nginx/.htpasswd
+  chmod 0640 /opt/local/etc/nginx/.htpasswd
+fi
+
 # Always run a restart of the webserver
 svcadm restart svc:/pkgsrc/nginx:default

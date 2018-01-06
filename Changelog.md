@@ -1,5 +1,9 @@
 # Changelog
 
+## 17.4.1
+
+* add http-basic auth to nginx
+
 ## 17.4.0
 
 * fix privacy leakage
