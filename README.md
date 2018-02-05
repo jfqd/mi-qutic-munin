@@ -55,6 +55,7 @@ vmadm create << EOF
     "munin_master_allow":    "munin-master-ip",
     "vfstab":                "storage.example.com:/export/munin    -       /data    nfs     -       yes     rw,bg,intr",
     "nginx_ssl":             "certificat-with-encoded-linebreaks",
+    "nginx_htpasswd":        "jerry:my-secret-password",
     "munin_admin":           "munin-admin-password"
   }
 }
