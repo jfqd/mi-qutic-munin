@@ -3,6 +3,8 @@
 ## 17.4.1
 
 * add http-basic auth to nginx
+* add cronjob for munin data backup
+* build on latest qutic base
 
 ## 17.4.0
 
