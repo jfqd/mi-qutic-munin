@@ -11,6 +11,13 @@ PATH=/opt/local/gnu/bin:/opt/local/bin:/opt/local/sbin:/usr/bin:/usr/sbin
 # Exit if any commands fail
 set -o errexit
 
+MUNIN_PLUGINS="
+	nginx
+"
+
+echo "* Activate munin plugins"
+/opt/qutic/bin/munin-node-plugins ${MUNIN_PLUGINS}
+
 # Configuring image specific packages
 echo "* Configuring image specific packages.";
 
@@ -22,10 +29,10 @@ rm -r /var/munin/*
 
 echo "* Download and extract munstrap to /opt/local/etc/munin/munstrap"
 (mkdir -p /opt/local/etc/munin/munstrap)
-curl -L "https://github.com/motu81/munstrap/archive/v${MUNSTRAP_VERSION}.tar.gz" | gtar xz -C /opt/local/etc/munin/munstrap --strip-components=1
+curl -L "https://github.com/drscream/munstrap/archive/v${MUNSTRAP_VERSION}.tar.gz" | gtar xz -C /opt/local/etc/munin/munstrap --strip-components=1
 
 # fix privacy leakage
-sed -i -e 's#code.jquery.com/jquery-1.10.2.min.js#cdn.radiantmagic.com/libs/jquery/1.10.2/min.js#g' /opt/local/etc/munin/munstrap/templates/partial/head.tmpl
+# sed -i -e 's#code.jquery.com/jquery-1.10.2.min.js#cdn.radiantmagic.com/libs/jquery/1.10.2/min.js#g' /opt/local/etc/munin/munstrap/templates/partial/head.tmpl
 
 echo "* Rename original template and create symlinks to activate munstrap"
 (cd /opt/local/etc/munin; mv static static-orig; mv templates templates-orig; ln -s munstrap/static static; ln -s munstrap/templates templates)
@@ -41,13 +48,15 @@ pip3.5 install -r /opt/munin_master_admin/req.txt
 echo "* Create nginx ssl folder"
 mkdir -p /opt/local/etc/nginx/ssl
 touch /opt/local/etc/nginx/.htpasswd
+ln -nfs /opt/local/www/munin/data/ /var/www
 
 echo "* Cleanup home/admin because of delegate dataset usage"
 rm -rf /home/admin/.[^.]*
 
 # Clean up
 echo "* Cleaning up."
-rm -rf /root/*
+rm -rf /root/customize
+history -c
 
 # Prepare image for provisioning
 sm-prepare-image -y
