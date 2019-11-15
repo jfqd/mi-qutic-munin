@@ -1,11 +1,11 @@
 {
   "name":         "qutic-munin",
-  "version":      "17.4.1",
+  "version":      "20181018.0",
   "description":  "qutic Munin Server",
   "organization": "qutic development",
   "brand":        "Instance",
   "homepage":     "https://github.com/jfqd/mi-qutic-munin",
-  "base":         "31ea7dee-0a8d-11e8-9d33-eb63e3201a8b",
+  "base":         "80eb3464-7ec3-11e9-8365-c32736cdd54f",
   "customer_metadata": {
     "admin_authorized_keys": {"type": "text", "description": "SSH public authorized key(s) for the admin user"},
     "root_authorized_keys":  {"type": "text", "description": "SSH public authorized key(s) for the root user"},

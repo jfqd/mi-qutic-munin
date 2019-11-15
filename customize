@@ -21,8 +21,8 @@ echo "* Activate munin plugins"
 # Configuring image specific packages
 echo "* Configuring image specific packages.";
 
-echo "* Use default python 3.5"
-pkg_alternatives manual python35
+echo "* Use default python 3.6"
+pkg_alternatives manual python36
 
 echo "* Cleanup /var/munin in order to set the dataset mountpoint (must be empty)"
 rm -r /var/munin/*
@@ -43,7 +43,7 @@ curl -L "https://github.com/drscream/munin_master_admin/archive/v${MUNIN_MASTER_
 chown -R www:www /opt/munin_master_admin
 
 echo "* Install required python packages"
-pip3.5 install -r /opt/munin_master_admin/req.txt
+pip3.6 install -r /opt/munin_master_admin/req.txt
 
 echo "* Create nginx ssl folder"
 mkdir -p /opt/local/etc/nginx/ssl
